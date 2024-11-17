@@ -1,0 +1,1 @@
+# mdm-registry-service
