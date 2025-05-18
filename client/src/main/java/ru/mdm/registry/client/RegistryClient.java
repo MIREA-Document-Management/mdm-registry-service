@@ -2,6 +2,7 @@ package ru.mdm.registry.client;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mdm.registry.client.feign.RegistryServiceFeignClient;
 import ru.mdm.registry.model.InstanceDto;
@@ -20,5 +21,10 @@ public class RegistryClient implements RegistryService {
     @Override
     public Mono<InstanceDto> registerService(RegisterServiceDto serviceDto) {
         return registryServiceFeignClient.registerService(serviceDto);
+    }
+
+    @Override
+    public Flux<InstanceDto> getServices() {
+        return registryServiceFeignClient.getServices();
     }
 }

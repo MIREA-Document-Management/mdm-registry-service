@@ -3,6 +3,7 @@ package ru.mdm.registry.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mdm.registry.model.InstanceDto;
 import ru.mdm.registry.model.RegisterServiceDto;
@@ -22,5 +23,10 @@ public class RegistryController implements RegistryRestApi {
     @Override
     public Mono<InstanceDto> registerService(RegisterServiceDto serviceDto) {
         return registryServiceImpl.registerService(serviceDto);
+    }
+
+    @Override
+    public Flux<InstanceDto> getServices() {
+        return registryServiceImpl.getServices();
     }
 }

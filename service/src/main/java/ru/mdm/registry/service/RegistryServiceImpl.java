@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import ru.mdm.kafka.service.KafkaService;
 import ru.mdm.registry.configuration.RegistryServiceProperties;
@@ -42,5 +43,10 @@ public class RegistryServiceImpl implements RegistryService {
                         .thenReturn(instance))
                 .flatMap(instance -> kafkaService.sendEvent(RegisterServiceEventSuccess.of(instance)).thenReturn(instance))
                 .onErrorMap(ExceptionUtils.extExceptionMapper(ErrorCode.CANNOT_REGISTER_SERVICE.getText()));
+    }
+
+    @Override
+    public Flux<InstanceDto> getServices() {
+        return null;
     }
 }
